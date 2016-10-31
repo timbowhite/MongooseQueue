@@ -14,7 +14,8 @@ module.exports = function(collectionName, payloadRefType)
 			blockedUntil: {
 				type: Date,
 				default: Date.now(),
-				required: false
+				required: false,
+                index: true
 			},
 			// hostname of the worker currently blocking/processing the job
 			workerHostname: {
@@ -30,18 +31,21 @@ module.exports = function(collectionName, payloadRefType)
 			retries: {
 				type: Number,
 				default: 0,
-				required: true
+				required: true,
+                index: true
 			},
 			// Payload is a reference to another mongoose object 
 			payload: {
 				type: payloadRefType,
-				required: true
+				required: true,
+                index: true 
 			},
 			// Is the job done or not (Does not matter if successful or not)
 			done: {
 				type: Boolean,
 				default: false,
-				required: true
+				required: true,
+                index: true 
 			},
 			// last error that occured while processing
 			error: {
@@ -49,7 +53,8 @@ module.exports = function(collectionName, payloadRefType)
 				required: false
 			}
 		}, {
-			timestamps: true
+			timestamps: true,
+            collection: collectionName
 		});
 	}
 
